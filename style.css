@@ -1,0 +1,26 @@
+*, *::before,*::after{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: 'Merriweather Sans', sans-serif;
+
+}
+
+:root{
+    --colorDark1: #112D4E;
+    --colorDark2: #3F72AF;
+    --colorLight1: #dbe2ef;
+    --colorLight2: #f9f7f7;
+}
+
+.wrapper{
+    width: 100vw;
+    height: 100vh;
+    color: var(--colorLight2);
+    background-image: linear-gradient(160deg, #112d4e 0%, #3f72af 100%);
+
+}
+
+h1{
+    text-align: center;
+}
