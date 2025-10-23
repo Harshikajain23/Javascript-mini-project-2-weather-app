@@ -15,6 +15,10 @@ const userInfoContainer = document.querySelector(".user-info-container");
 
 let currentTab = userTab;
 
+const errorContainer = document.querySelector('.error-container');
+const errorImg = document.getElementById('error-img');
+const errorMsg = document.getElementById('error-msg');
+
 const API_KEY = "5a9f9ca9ed3143865a5c532da79791e5";
 currentTab.classList.add("current-tab");
 
@@ -88,10 +92,21 @@ async function fetchUserWeatherInfo(coordinates) {
 
     userInfoContainer.classList.add("active");
 
+
     // render
     renderWeatherInfo(data);
+
+     if (data.cod != 200) {
+      userInfoContainer.classList.remove("active");
+      errorContainer.classList.add("active");
+      errorImg.src = "assets/not-found.png"; // make sure this path is correct
+      errorMsg.textContent = data.message || "City not found!";
+      return; // stop execution
+    }
   } catch (err) {
     // hw
+
+    // i tried but not working
     loadingScreen.classList.remove("active");
 
     // Optionally hide user info if previously visible
@@ -102,8 +117,12 @@ async function fetchUserWeatherInfo(coordinates) {
       "Failed to fetch weather data. Please check your internet connection or try again later."
     );
 
-    // Log the error for debugging
-    console.error("Error fetching weather data:", err);
+    errorContainer.classList.add("active");
+    // make sure path is correct
+    errorMsg.textContent =
+      err.message === "City not found"
+        ? "City not found! Please check the city name."
+        : "Something went wrong. Please try again.";
   }
 }
 
@@ -136,11 +155,11 @@ function renderWeatherInfo(weatherInfo) {
 
   temp.innerText =`${weatherInfo?.main?.temp} °C`;
 
-  windspeed.innerText = weatherInfo?.wind?.speed;
+  windspeed.innerText = `${weatherInfo?.wind?.speed} m/s`;
 
-  humidity.innerText = weatherInfo?.main?.humidity;
+  humidity.innerText = `${weatherInfo?.main?.humidity}%`;
 
-  cloudiness.innerText = weatherInfo?.clouds?.all;
+  cloudiness.innerText = `${weatherInfo?.clouds?.all}%`;
 }
 
 function getLocation() {
@@ -196,16 +215,17 @@ async function fetchSearchWeatherInfo(city) {
     userInfoContainer.classList.add("active")
     renderWeatherInfo(data);
   } catch (err) {
-    console.error("Error fetching weather data:", err);
 
-    // Hide loading or info section if any
+    // hide loader & info section
     loadingScreen.classList.remove("active");
     userInfoContainer.classList.remove("active");
 
-    // Show user-friendly message
-    alert(
-      "Unable to fetch weather details. Please check the city name or your internet connection."
-    );
+    errorContainer.classList.add("active");
+    
+    errorMsg.textContent =
+      err.message === "City not found"
+        ? "City not found! Please check the city name."
+        : "Something went wrong. Please try again.";
   }
 }
 

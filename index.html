@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+     <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -16,7 +20,7 @@
 
       <div class="weather-container">
         <!-- grant location -->
-        <div class="grant-location-container">
+        <div class="sub-container grant-location-container">
           <img
             src="assets/location.png"
             alt=""
@@ -48,13 +52,17 @@
         </form>
 
         <!-- loading screen container -->
-        <div class="loading-container">
+        <div class="sub-container loading-container">
           <img src="assets/loading.gif" width="150" height="150" />
           <p>Loading</p>
         </div>
 
+        <div class="error-container">
+        <img id="error-img" src="assets/not-found.png" alt="Error occurred" />
+        <p id="error-msg"></p>
+       </div>
         <!-- show weather information -->
-        <div class="user-info-container">
+        <div class="sub-container user-info-container">
           <!-- city name and flag -->
           <div class="name">
             <p data-cityName></p>
