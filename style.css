@@ -4,6 +4,13 @@ padding: 0;
 box-sizing: border-box;
 font-family: 'Merriweather Sans', sans-serif;
 
+body{
+     overflow-y: hidden;
+    overflow-x: hidden;
+    color: var(--colorLight2);
+    background-image: linear-gradient(160deg, #112d4e 0%, #3f72af 100%);
+    
+}
 }
 
 :root{
@@ -16,16 +23,20 @@ font-family: 'Merriweather Sans', sans-serif;
 .wrapper{
     min-height: 100vh;
     width: 100vw;
+    scale: .8;
+
     
-    color: var(--colorLight2);
-    background-image: linear-gradient(160deg, #112d4e 0%, #3f72af 100%);
+    /* color: var(--colorLight2);
+    background-image: linear-gradient(160deg, #112d4e 0%, #3f72af 100%); */
 
 }
 
 h1{
     text-align: center;
     text-transform: uppercase;
-    padding-top: 20px;
+    font-size: 2.5rem;
+    
+    margin-top: -30px;
 }
 
 .tab-container{
@@ -34,13 +45,13 @@ h1{
     justify-content: space-between;
     max-width: 550px;
     margin: 0 auto;
-    margin-top: 3rem;
+    margin-top: 2rem;
 
 }
 
 .tab{
     cursor: pointer;
-    font-size: 0.875rem;
+    font-size: 1.40rem;
     letter-spacing: 1.75px;
     padding: 5px 8px;
 }
@@ -133,13 +144,13 @@ font-weight: 600;
 
 .name p{
 
-    font-size: 2rem;
+    font-size: 3rem;
 }
 
 
 
 .user-info-container p{
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     font-weight: 200;
 }
 
@@ -157,7 +168,7 @@ font-weight: 600;
 /* using custom attribute */
 
 .user-info-container p[data-temp]{
-    font-size: 1.75rem;
+    font-size: 2.00rem;
     font-weight: 700;
 }
 
@@ -166,7 +177,7 @@ font-weight: 600;
     align-items: center;
     gap: 10px 20px;
     justify-content: center;
-    margin-top: 2rem;
+    margin-top: 1.5rem;
     margin-bottom: 10rem;
 }
 
@@ -176,8 +187,9 @@ font-weight: 600;
     background-color: rgba(219, 226, 239, 0.5);
     width: 180px;
     max-width: 200px;
+    height: 140px;
     border-radius: 5px;
-    padding: 1rem;
+    padding: .5rem;
     font-size: 1rem;
     gap: 5px 0;
     align-items: center;
@@ -209,7 +221,7 @@ font-weight: 600;
     margin:0 auto;
     justify-content: center;
     gap: 0 10px;
-    margin-bottom : 3rem;
+    margin-bottom : 2rem;
 }
 
 .form-container.active{
@@ -253,11 +265,18 @@ font-weight: 600;
 
 .error-container.active {
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .error-container img {
-  width: 120px;
-  height: 120px;
+  width: 400px;
+  height: 400px;
   object-fit: contain;
   margin-bottom: 1rem;
+}
+
+#error-msg{
+    font-size: 1.5rem;
 }

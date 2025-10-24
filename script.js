@@ -31,6 +31,7 @@ getfromSessionStorage();
 function switchTab(clickedTab) {
   if (clickedTab != currentTab) {
     currentTab.classList.remove("current-tab");
+    errorContainer.classList.remove("active");
     currentTab = clickedTab;
     currentTab.classList.add("current-tab");
 
@@ -86,6 +87,7 @@ async function fetchUserWeatherInfo(coordinates) {
       `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`
     );
 
+    errorContainer.classList.remove("active");
     const data = await response.json();
 
     loadingScreen.classList.remove("active");
@@ -194,13 +196,20 @@ searchForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
   let cityName = searchInput.value;
-  if (cityName === "") return;
+ if (!cityName) {
+  userInfoContainer.classList.remove("active");
+  errorContainer.classList.add("active");
+  errorImg.src = "assets/not-found.png";
+  errorMsg.textContent = "Please enter a valid city name!";
+  return;
+}
 
   fetchSearchWeatherInfo(cityName);
 });
 
 async function fetchSearchWeatherInfo(city) {
   loadingScreen.classList.add("active");
+  errorContainer.classList.remove("active");
   userInfoContainer.classList.remove("active");
   grantAccessContainer.classList.remove("active");
 
@@ -211,9 +220,19 @@ async function fetchSearchWeatherInfo(city) {
 
     const data = await response.json();
 
-    loadingScreen.classList.remove("active");
-    userInfoContainer.classList.add("active")
-    renderWeatherInfo(data);
+   
+ loadingScreen.classList.remove("active");
+
+ if (data.cod != 200) {
+  userInfoContainer.classList.remove("active");
+  errorContainer.classList.add("active");
+  errorImg.src = "assets/not-found.png";
+  errorMsg.textContent = "City not found !";
+  return;
+}
+
+userInfoContainer.classList.add("active");
+renderWeatherInfo(data);
   } catch (err) {
 
     // hide loader & info section
