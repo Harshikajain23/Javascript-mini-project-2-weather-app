@@ -1,4 +1,4 @@
-Created a **weather app** using HTML, CSS and Javascript.
+Created a **Weather App** using HTML, CSS and Javascript.
 
 [Live link](https://harshikajain23.github.io/Javascript-mini-project-2-weather-app/)
 
